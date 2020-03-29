@@ -7,21 +7,51 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class tutor_profile extends AppCompatActivity {
     private Button btn_select;
     private Button btn_upload;
     private Uri mImageUri;
+    StorageReference mstorageref;
+    DatabaseReference mDatabaseRef;
+    ProgressBar mprogressbar;
+    EditText tname,temail,tphonenumber,tacademicstatus;
+    ImageView mImageView;
+    Spinner tskillset;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutor_profile);
-        FirebaseStorage mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
-        FirebaseDatabase mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        mImageView = findViewById(R.id.profile_image);
+        mprogressbar = findViewById(R.id.progressbar);
+        tname = findViewById(R.id.tutor_name);
+        temail = findViewById(R.id.tutor_email);
+        tphonenumber = findViewById(R.id.tutor_phone);
+        tacademicstatus = findViewById(R.id.tutor_academic_status);
+        tskillset = findViewById(R.id.skillsetspinner);
+         mstorageref = FirebaseStorage.getInstance().getReference("uploads");
+         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,11 +73,33 @@ private String getFileExtension(Uri uri){
 }
     private void uploadImage() {
 if(mImageUri != null){
-StorageReference fileReference = mStorgeRef.child(System.currentTimeMillis()+"."+getFileExtension(mImageUri));
+StorageReference fileReference = mstorageref.child(System.currentTimeMillis()+"."+getFileExtension(mImageUri));
 fileReference.putFile(mImageUri)
-        .addOsuccessListner
+        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+Toast.makeText(getApplicationContext(),"upload succesiful",Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+    @Override
+    public void onFailure(@NonNull Exception e) {
+        Toast.makeText(tutor_profile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+
+}).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+    @Override
+    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+double progress = 100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount();
+mprogressbar.setProgress((int) progress);
+    }
+});
+
+
     }else{
     Toast.makeText(this,"no file selected",Toast.LENGTH_SHORT).show();
+    }
     }
 
     private void selectImage(){
@@ -59,13 +111,15 @@ fileReference.putFile(mImageUri)
                );
 
     }
+
     @Override
     protected void onActivityResult(int requestCode,int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode==PICK_IMAGE_REQUEST&&resultCode==RESULT_OK
+        if(requestCode== PICK_IMAGE_REQUEST && resultCode==RESULT_OK
         &&data!=null &&data.getData()!=null){
-            mImageUrl = data.getData();
+            mImageUri = data.getData();
             picasso.with(this).load(mImageUri).into(mImageView);
+
         }
 
     }
