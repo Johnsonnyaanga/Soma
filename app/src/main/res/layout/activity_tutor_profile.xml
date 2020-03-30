@@ -14,8 +14,7 @@
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/back_design"
-        android:text="Add your profile"
+        android:text="@string/add_your_profile"
         android:textColor="@android:color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         />
@@ -89,7 +88,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phone no."
+                android:text="@string/phone_no"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:padding="5dp"
                 android:layout_margin="10dp"
@@ -118,7 +117,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="current academic status"
+                android:text="@string/current_academic_status"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:padding="5dp"
                 android:layout_margin="10dp"
@@ -140,6 +139,7 @@
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="365dp"
+
         android:layout_height="200dp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -152,7 +152,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Profile photo"
+                android:text="@string/profile_photo"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:padding="5dp"
                 android:layout_margin="10dp"
@@ -163,7 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <Button
-                android:background="@drawable/ed_design"
+
                 android:text="Choose image"
                 android:textColor="@android:color/white"
                 android:layout_width="match_parent"
@@ -177,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <Button
-                android:background="@drawable/ed_design"
+
                 android:text="save"
                 android:textColor="@android:color/white"
                 android:layout_width="match_parent"

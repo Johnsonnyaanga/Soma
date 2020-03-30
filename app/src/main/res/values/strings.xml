@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">ElimuApp</string>
     <string name="skillprompt">Choose skill</string>
+    <string name="add_your_profile">Add your profile</string>
+    <string name="phone_no">Phone no.</string>
+    <string name="current_academic_status">current academic status</string>
+    <string name="profile_photo">Profile photo</string>
     <string-array name="skillset">
         <item>Mathematics</item>
         <item>Physics</item>

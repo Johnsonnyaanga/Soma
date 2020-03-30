@@ -24,6 +24,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 public class tutor_profile extends AppCompatActivity {
     private Button btn_select;
@@ -35,6 +36,7 @@ public class tutor_profile extends AppCompatActivity {
     EditText tname,temail,tphonenumber,tacademicstatus;
     ImageView mImageView;
     Spinner tskillset;
+    int PICK_IMAGE_REQUEST=1;
 
 
 
@@ -48,6 +50,8 @@ public class tutor_profile extends AppCompatActivity {
         tname = findViewById(R.id.tutor_name);
         temail = findViewById(R.id.tutor_email);
         tphonenumber = findViewById(R.id.tutor_phone);
+        btn_select = findViewById(R.id.tutor_profile_photo);
+        btn_upload = findViewById(R.id.tutor_profile_photo_upload);
         tacademicstatus = findViewById(R.id.tutor_academic_status);
         tskillset = findViewById(R.id.skillsetspinner);
          mstorageref = FirebaseStorage.getInstance().getReference("uploads");
@@ -79,7 +83,6 @@ fileReference.putFile(mImageUri)
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 Toast.makeText(getApplicationContext(),"upload succesiful",Toast.LENGTH_SHORT).show();
-
             }
         }).addOnFailureListener(new OnFailureListener() {
     @Override
@@ -118,7 +121,9 @@ mprogressbar.setProgress((int) progress);
         if(requestCode== PICK_IMAGE_REQUEST && resultCode==RESULT_OK
         &&data!=null &&data.getData()!=null){
             mImageUri = data.getData();
-            picasso.with(this).load(mImageUri).into(mImageView);
+            Picasso.get().load(mImageUri).into(mImageView);
+
+
 
         }
 
