@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -36,7 +37,7 @@ public class tutor_profile extends AppCompatActivity {
     EditText tname,temail,tphonenumber,tacademicstatus;
     ImageView mImageView;
     Spinner tskillset;
-    int PICK_IMAGE_REQUEST=1;
+    int PICK_IMAGE_REQUEST=100;
 
 
 
@@ -105,15 +106,29 @@ mprogressbar.setProgress((int) progress);
     }
     }
 
-    private void selectImage(){
+    /*private void selectImage(){
         Intent intent = new Intent();
         intent.setType("/image*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(
                 intent,PICK_IMAGE_REQUEST
                );
+    }*/
 
+    private void selectImage(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE_REQUEST);
     }
+
+
+
+
+
+
+
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode,int resultCode, Intent data){
