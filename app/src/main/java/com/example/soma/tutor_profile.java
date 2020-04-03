@@ -106,16 +106,10 @@ mprogressbar.setProgress((int) progress);
     }else{
     Toast.makeText(this,"no file selected",Toast.LENGTH_SHORT).show();
     }
+
     }
 
-    /*private void selectImage(){
-        Intent intent = new Intent();
-        intent.setType("/image*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(
-                intent,PICK_IMAGE_REQUEST
-               );
-    }*/
+
 
     private void selectImage(){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -146,44 +140,12 @@ mprogressbar.setProgress((int) progress);
 
     }
 
-    public void insertData(View view){
-        addUser(tname.getText().toString().trim(),temail.getText().toString().trim(),tphonenumber.getText().toString().trim(),tacademicstatus.getText().toString().trim(),mImageUri,tskillset.toString().trim());
-    }
+
 
 
     //insert user profile data
-    public void addUser(String name, String email, String phonenumber,String current_academic_status, Uri mImageUri,String skillset){
-
-
-        if(mImageUri != null){
-            StorageReference fileReference = mstorageref.child(System.currentTimeMillis()+"."+getFileExtension(mImageUri));
-            fileReference.putFile(mImageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(getApplicationContext(),"upload succesiful",Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(tutor_profile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-
-
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                    double progress = 100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount();
-                    mprogressbar.setProgress((int) progress);
-                }
-            });
-
-
-        }else{
-            Toast.makeText(this,"no file selected",Toast.LENGTH_SHORT).show();
-        }
-        //String mimagename = System.currentTimeMillis()+"."+getFileExtension(mImageUri);
-        uploadfile users = new uploadfile(name, email, phonenumber,current_academic_status,mImageUri,skillset);
+    public void addUser(String name, String email, String phonenumber,String current_academic_status,String skillset){
+        uploadfile users = new uploadfile(name, email, phonenumber,current_academic_status,skillset);
         mDatabaseRef.child("Users profile").child(userid).setValue(users);
     }
 

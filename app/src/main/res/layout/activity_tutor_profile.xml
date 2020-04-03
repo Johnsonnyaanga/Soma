@@ -22,6 +22,58 @@
         android:textColor="@android:color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         />
+        <androidx.cardview.widget.CardView
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:outlineAmbientShadowColor="@android:color/black"
+            android:outlineSpotShadowColor="@android:color/black"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:cardCornerRadius="45dp"
+            >
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_camera"
+                />
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_photo"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:padding="5dp"
+                    android:layout_margin="10dp"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <Button
+
+                    android:text="Choose image"
+                    android:background="@android:color/background_dark"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:id="@+id/tutor_profile_photo"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -140,65 +192,16 @@
                 />
         </RelativeLayout>
     </LinearLayout>
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="365dp"
 
-        android:layout_height="200dp"/>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/profile_photo"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:padding="5dp"
-                android:layout_margin="10dp"
-                />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button
-
-                android:text="Choose image"
-                android:background="@android:color/background_dark"
-                android:textColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:id="@+id/tutor_profile_photo"
-                />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button
-
-                android:text="save"
-                android:background="@android:color/background_dark"
-                android:textColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:id="@+id/tutor_profile_photo_upload"
-                />
-        </RelativeLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
@@ -211,7 +214,20 @@
 
         </RelativeLayout>
 
+
+            <Button
+                android:layout_marginTop="10dp"
+                android:text="save"
+                android:background="@android:color/background_dark"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:id="@+id/tutor_profile_photo_upload"
+                />
+
     </LinearLayout>
+
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

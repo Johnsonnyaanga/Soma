@@ -7,14 +7,14 @@ public class uploadfile {
     private String email;
     private String phonenumber;
     private String current_academic_status;
-    private Uri mImageUrl;
+
     private String skillset;
 
     public  uploadfile(){
 
     }
 
-    public uploadfile(String name, String email, String phonenumber, String current_academic_status, Uri mImageUrl, String skillset) {
+    public uploadfile(String name, String email, String phonenumber, String current_academic_status,  String skillset) {
 
         whenEmpty(name);
         whenEmpty(email);
@@ -28,7 +28,7 @@ public class uploadfile {
         this.email = email;
         this.phonenumber = phonenumber;
         this.current_academic_status = current_academic_status;
-        this.mImageUrl = mImageUrl;
+
         this.skillset = skillset;
     }
 
@@ -64,13 +64,9 @@ public class uploadfile {
         this.current_academic_status = current_academic_status;
     }
 
-    public Uri getmImageUrl() {
-        return mImageUrl;
-    }
 
-    public void setmImageUrl(Uri mImageUrl) {
-        this.mImageUrl = mImageUrl;
-    }
+
+
 
     public String getSkillset() {
         return skillset;
