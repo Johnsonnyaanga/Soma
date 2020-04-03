@@ -31,6 +31,7 @@ public class tutor_profile extends AppCompatActivity {
     private Button btn_select;
     private Button btn_upload;
     private Uri mImageUri;
+    private String userid;
     StorageReference mstorageref;
     DatabaseReference mDatabaseRef;
     ProgressBar mprogressbar;
@@ -55,8 +56,9 @@ public class tutor_profile extends AppCompatActivity {
         btn_upload = findViewById(R.id.tutor_profile_photo_upload);
         tacademicstatus = findViewById(R.id.tutor_academic_status);
         tskillset = findViewById(R.id.skillsetspinner);
-         mstorageref = FirebaseStorage.getInstance().getReference("uploads");
-         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+         mstorageref = FirebaseStorage.getInstance().getReference("SOMA");
+         mDatabaseRef = FirebaseDatabase.getInstance().getReference("SOMA");
+         userid = mDatabaseRef.push().getKey();
 
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +144,47 @@ mprogressbar.setProgress((int) progress);
 
         }
 
+    }
+
+    public void insertData(View view){
+        addUser(tname.getText().toString().trim(),temail.getText().toString().trim(),tphonenumber.getText().toString().trim(),tacademicstatus.getText().toString().trim(),mImageUri,tskillset.toString().trim());
+    }
+
+
+    //insert user profile data
+    public void addUser(String name, String email, String phonenumber,String current_academic_status, Uri mImageUri,String skillset){
+
+
+        if(mImageUri != null){
+            StorageReference fileReference = mstorageref.child(System.currentTimeMillis()+"."+getFileExtension(mImageUri));
+            fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(getApplicationContext(),"upload succesiful",Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(tutor_profile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = 100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount();
+                    mprogressbar.setProgress((int) progress);
+                }
+            });
+
+
+        }else{
+            Toast.makeText(this,"no file selected",Toast.LENGTH_SHORT).show();
+        }
+        //String mimagename = System.currentTimeMillis()+"."+getFileExtension(mImageUri);
+        uploadfile users = new uploadfile(name, email, phonenumber,current_academic_status,mImageUri,skillset);
+        mDatabaseRef.child("Users profile").child(userid).setValue(users);
     }
 
     }
