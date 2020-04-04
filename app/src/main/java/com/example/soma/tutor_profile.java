@@ -103,7 +103,7 @@ double progress = 100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotal
 mprogressbar.setProgress((int) progress);
     }
 });
-    mDatabaseRef.child("Users profile").child(userid).child("profile_image").setValue(mImageUri);
+   // mDatabaseRef.child("Users profile").child(userid).child("profile_image").setValue(mImageUri);
 
     addUser(tname.getText().toString().trim(),temail.getText().toString().trim(),tphonenumber.getText().toString().trim(),tacademicstatus.getText().toString().trim(),tskillset.getSelectedItem().toString().trim());
 
