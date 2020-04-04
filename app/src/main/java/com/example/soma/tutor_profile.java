@@ -56,6 +56,8 @@ public class tutor_profile extends AppCompatActivity {
         btn_upload = findViewById(R.id.tutor_profile_photo_upload);
         tacademicstatus = findViewById(R.id.tutor_academic_status);
         tskillset = findViewById(R.id.skillsetspinner);
+
+
          mstorageref = FirebaseStorage.getInstance().getReference("SOMA");
          mDatabaseRef = FirebaseDatabase.getInstance().getReference("SOMA");
          userid = mDatabaseRef.push().getKey();
@@ -101,6 +103,9 @@ double progress = 100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotal
 mprogressbar.setProgress((int) progress);
     }
 });
+    mDatabaseRef.child("Users profile").child(userid).child("profile_image").setValue(mImageUri);
+
+    addUser(tname.getText().toString().trim(),temail.getText().toString().trim(),tphonenumber.getText().toString().trim(),tacademicstatus.getText().toString().trim(),tskillset.getSelectedItem().toString().trim());
 
 
     }else{
@@ -146,7 +151,12 @@ mprogressbar.setProgress((int) progress);
     //insert user profile data
     public void addUser(String name, String email, String phonenumber,String current_academic_status,String skillset){
         uploadfile users = new uploadfile(name, email, phonenumber,current_academic_status,skillset);
-        mDatabaseRef.child("Users profile").child(userid).setValue(users);
+        mDatabaseRef.child("Users profile").child(userid).setValue(users).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getApplicationContext(), "successful text upload",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     }
