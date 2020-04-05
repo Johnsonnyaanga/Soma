@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -35,7 +36,8 @@ public class tutor_profile extends AppCompatActivity {
     StorageReference mstorageref;
     DatabaseReference mDatabaseRef;
     ProgressBar mprogressbar;
-    EditText tname,temail,tphonenumber,tacademicstatus;
+    EditText tname,temail,tphonenumber;
+    Spinner tacademicstatus;
     ImageView mImageView;
     Spinner tskillset;
     int PICK_IMAGE_REQUEST=100;
@@ -71,7 +73,7 @@ public class tutor_profile extends AppCompatActivity {
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadImage();
+                uploadProfile();
             }
         });
     }
@@ -80,14 +82,21 @@ private String getFileExtension(Uri uri){
     MimeTypeMap mime = MimeTypeMap.getSingleton();
     return mime.getExtensionFromMimeType(cR.getType(uri));
 }
-    private void uploadImage() {
+    private void uploadProfile() {
+
+
 if(mImageUri != null){
+    //checkIfallFieldsFilled();
 StorageReference fileReference = mstorageref.child(System.currentTimeMillis()+"."+getFileExtension(mImageUri));
 fileReference.putFile(mImageUri)
         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 Toast.makeText(getApplicationContext(),"upload succesiful",Toast.LENGTH_SHORT).show();
+//uploadfile users = new uploadfile(tname.getText().toString().trim(),temail.getText().toString().trim(),taskSnapshot.getUploadSessionUri().toString(),tphonenumber.getText().toString().trim(),tacademicstatus.getText().toString().trim(),tskillset.getSelectedItem().toString().trim());
+
+                addUser(tname.getText().toString().trim(),temail.getText().toString().trim(),taskSnapshot.getUploadSessionUri().toString(),tphonenumber.getText().toString().trim(),tacademicstatus.getSelectedItem().toString().trim(),tskillset.getSelectedItem().toString().trim());
+
             }
         }).addOnFailureListener(new OnFailureListener() {
     @Override
@@ -105,7 +114,6 @@ mprogressbar.setProgress((int) progress);
 });
    // mDatabaseRef.child("Users profile").child(userid).child("profile_image").setValue(mImageUri);
 
-    addUser(tname.getText().toString().trim(),temail.getText().toString().trim(),tphonenumber.getText().toString().trim(),tacademicstatus.getText().toString().trim(),tskillset.getSelectedItem().toString().trim());
 
 
     }else{
@@ -114,6 +122,22 @@ mprogressbar.setProgress((int) progress);
 
     }
 
+    private void checkIfallFieldsFilled() {
+        String name = tname.getText().toString().trim();
+        String email = temail.getText().toString().trim();
+        String phonenumber = tphonenumber.getText().toString().trim();
+        String skill = tskillset.getSelectedItem().toString();
+        String academic_status = tacademicstatus.getSelectedItem().toString();
+        if (TextUtils.isEmpty(name)){
+            tname.setError("name required");
+        }else if (TextUtils.isEmpty(email)){
+            temail.setError("email required");
+        }
+        else if (TextUtils.isEmpty(phonenumber)){
+            tphonenumber.setError("phone number required");
+
+        }
+    }
 
 
     private void selectImage(){
@@ -149,9 +173,9 @@ mprogressbar.setProgress((int) progress);
 
 
     //insert user profile data
-    public void addUser(String name, String email, String phonenumber,String current_academic_status,String skillset){
-        uploadfile users = new uploadfile(name, email, phonenumber,current_academic_status,skillset);
-        mDatabaseRef.child("Users profile").child(userid).setValue(users).addOnSuccessListener(new OnSuccessListener<Void>() {
+    public void addUser(String name, String email,String mImageurl, String phonenumber,String current_academic_status,String skillset){
+        uploadfile users = new uploadfile(name, email,mImageurl, phonenumber,current_academic_status,skillset);
+        mDatabaseRef.child("Users profile").child(tname.getText().toString().trim()+userid).setValue(users).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(getApplicationContext(), "successful text upload",Toast.LENGTH_LONG).show();

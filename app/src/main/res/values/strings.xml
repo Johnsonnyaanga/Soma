@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">ElimuApp</string>
     <string name="skillprompt">Choose skill</string>
-    <string name="add_your_profile">Add your profile</string>
+    <string name="current_academic_status_prompt">Choose Current Academic Status</string>
+    <string name="add_your_profile">Profile</string>
     <string name="phone_no">Phone no.</string>
     <string name="current_academic_status">current academic status</string>
     <string name="profile_photo">Profile photo</string>
+    <string name="choose_profile_image">Choose profile image</string>
     <string-array name="skillset">
         <item>Mathematics</item>
         <item>Physics</item>
@@ -15,6 +17,13 @@
         <item>Programming </item>
         <item>Geography</item>
 
+    </string-array>
+    <string-array name="current_academic_status">
+        <item>Bachelors degree</item>
+        <item>Diploma</item>
+        <item>Post highschool</item>
+        <item>Masters degree</item>
+        <item>Phd holder</item>
     </string-array>
 
 </resources>

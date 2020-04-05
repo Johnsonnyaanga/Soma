@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:layout_margin="0dp"
+    android:layout_marginLeft="10dp"
+    app:layout_goneMarginRight="10dp"
+    android:layout_marginBottom="10dp"
     tools:context=".tutor_profile">
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,12 +16,14 @@
 
 
     <TextView
+        android:layout_marginBottom="4dp"
+        android:background="@color/blue"
         android:gravity="center"
-        android:padding="5dp"
+        android:padding="7dp"
+        android:textSize="25sp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="@string/add_your_profile"
-        android:background="@android:color/background_dark"
         android:textColor="@android:color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         />
@@ -37,34 +42,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/profile_camera"
+                android:src="@mipmap/johnie"
                 />
         </androidx.cardview.widget.CardView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/profile_photo"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:padding="5dp"
-                    android:layout_margin="10dp"
-                    />
-            </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
                 <Button
 
-                    android:text="Choose image"
-                    android:background="@android:color/background_dark"
+                    android:text="@string/choose_profile_image"
+                    android:background="@drawable/bkg"
                     android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,25 +72,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Full name"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:padding="5dp"
 
-                android:layout_margin="10dp"
-                />
-        </RelativeLayout>
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2">
             <EditText
+                android:hint="Enter your full name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -109,24 +90,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="email"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:padding="5dp"
-                android:layout_margin="10dp"
-                />
-        </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2">
             <EditText
+                android:hint="Enter your email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -137,24 +107,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/phone_no"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:padding="5dp"
-                android:layout_margin="10dp"
-                />
-        </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2">
             <EditText
+                android:hint="Enter your phone number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -167,30 +126,31 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-            <TextView
+
+            <Spinner
+                android:id="@+id/tutor_academic_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/current_academic_status"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:padding="5dp"
-                android:layout_margin="10dp"
-                />
+                android:entries="@array/current_academic_status"
+                android:prompt="@string/current_academic_status_prompt" />
+
         </RelativeLayout>
-        <RelativeLayout
+       <!-- <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2">
             <EditText
+                android:hint="Enter your current academic status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:maxLines="5"
                 android:id="@+id/tutor_academic_status"
                 />
-        </RelativeLayout>
+        </RelativeLayout>-->
     </LinearLayout>
 
 
@@ -203,6 +163,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_weight="1">
 
             <Spinner
@@ -218,10 +179,11 @@
             <Button
                 android:layout_marginTop="10dp"
                 android:text="save"
-                android:background="@android:color/background_dark"
+                android:background="@drawable/bkg"
                 android:textColor="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_margin="10dp"
                 android:id="@+id/tutor_profile_photo_upload"
                 />

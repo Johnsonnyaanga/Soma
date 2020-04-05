@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="314dp"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="310dp"
         android:layout_margin="10dp"
         android:background="@color/white"
         android:elevation="10dp"
@@ -18,33 +19,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-
-                <de.hdodenhof.circleimageview.CircleImageView
+                <androidx.cardview.widget.CardView
                     android:layout_gravity="center"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/johnie"
-                    android:scaleType="centerCrop"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="#FF000000"/>
+                    android:layout_margin="10dp"
+                    android:outlineAmbientShadowColor="@android:color/black"
+                    android:outlineSpotShadowColor="@android:color/black"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="45dp"
+                    >
 
+                    <ImageView
+                        android:id="@+id/profile_image_show_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/johnie"
+
+                        />
+                </androidx.cardview.widget.CardView>
                 <TextView
+                    android:id="@+id/fullname_show"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="JOHNSON NYAANGA"
-                    android:textSize="30sp"
+                    android:textSize="21sp"
                     android:textColor="@android:color/black"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:id="@+id/tutor_email_show"
                     android:text="johnsonyaanga@gmail.com"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="@color/blackk"
                     />
                 <TextView
@@ -52,7 +61,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Chemistry"
-                    android:textSize="25sp"
+                    android:id="@+id/user_skillset_show"
+                    android:textSize="20sp"
                     android:textColor="@color/blue"
                     />
 
@@ -60,7 +70,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -70,13 +80,14 @@
                     android:src="@drawable/ic_email_black_24dp"
                     android:layout_margin="5dp"
                     />
-                <TextView
+                <Button
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Available"
                     android:textSize="15sp"
-                    android:textColor="@color/blackk"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bkg"
                     android:layout_margin="5dp"
                     />
                 <ImageView
@@ -91,15 +102,23 @@
 
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:paddingTop="5dp"
+                android:background="#c0c0c0"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="10dp"
+
+
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+
                     android:orientation="horizontal">
                     <ImageView
                         android:layout_width="match_parent"
@@ -119,6 +138,10 @@
                         />
 
                 </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#c0c0c0"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -132,6 +155,7 @@
                         android:layout_margin="1dp"
                         />
                     <TextView
+                        android:id="@+id/show_tutor_full_profile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -151,4 +175,4 @@
 
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</LinearLayout>

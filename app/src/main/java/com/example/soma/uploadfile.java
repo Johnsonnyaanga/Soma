@@ -5,6 +5,7 @@ import android.net.Uri;
 public class uploadfile {
     private String name;
     private String email;
+    private String mImageUrl;
     private String phonenumber;
     private String current_academic_status;
 
@@ -14,7 +15,7 @@ public class uploadfile {
 
     }
 
-    public uploadfile(String name, String email, String phonenumber, String current_academic_status,  String skillset) {
+    public uploadfile(String name, String email,String mImageUrl, String phonenumber, String current_academic_status,  String skillset) {
 
         whenEmpty(name);
         whenEmpty(email);
@@ -26,6 +27,7 @@ public class uploadfile {
 
         this.name = name;
         this.email = email;
+        this.mImageUrl= mImageUrl;
         this.phonenumber = phonenumber;
         this.current_academic_status = current_academic_status;
 
@@ -48,6 +50,12 @@ public class uploadfile {
         this.email = email;
     }
 
+    public String getmImageUrl() {
+        return mImageUrl;
+    }
+    public void setmImageUrl(String mImageUrl) {
+        this.mImageUrl = mImageUrl;
+    }
     public String getPhonenumber() {
         return phonenumber;
     }
