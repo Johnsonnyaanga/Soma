@@ -154,16 +154,16 @@
                         android:src="@drawable/profile_icon"
                         android:layout_margin="1dp"
                         />
+
                     <TextView
                         android:id="@+id/show_tutor_full_profile"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:textColor="@color/blue"
-                        android:paddingTop="17dp"
+                        android:layout_width="82dp"
+                        android:layout_height="14dp"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:paddingTop="17dp"
                         android:text="PROFILE"
-                        />
+                        android:textColor="@color/blue" />
 
                 </LinearLayout>
 

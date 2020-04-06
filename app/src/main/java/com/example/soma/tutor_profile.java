@@ -77,6 +77,7 @@ public class tutor_profile extends AppCompatActivity {
             }
         });
     }
+    //get file extension for profile image
 private String getFileExtension(Uri uri){
     ContentResolver cR = getContentResolver();
     MimeTypeMap mime = MimeTypeMap.getSingleton();

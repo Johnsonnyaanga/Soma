@@ -72,7 +72,7 @@ holder.fullprofile.setOnClickListener(new View.OnClickListener() {
     }
 
     private void getFullProfile() {
-        
+        Intent me = new Intent(getApplicationContext(),tutor_profile.class);
 
     }
 });
