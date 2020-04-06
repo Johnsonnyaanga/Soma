@@ -37,6 +37,7 @@ public class Login extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 String mEmail= auth_mail.getText().toString().trim();
                 String mPass=auth_pass.getText().toString().trim();
                 if(TextUtils.isEmpty(mEmail)){

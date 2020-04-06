@@ -5,10 +5,10 @@
 
 
     <item
-        android:id="@+id/settings"
+        android:id="@+id/home"
         app:showAsAction="always"
-        android:icon="@drawable/settings"
-        android:title="settings" />
+        android:icon="@drawable/home"
+        android:title="home" />
     <item
         android:title="search"
         android:id="@+id/search"

@@ -93,10 +93,11 @@ fileReference.putFile(mImageUri)
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 Toast.makeText(getApplicationContext(),"upload succesiful",Toast.LENGTH_SHORT).show();
-//uploadfile users = new uploadfile(tname.getText().toString().trim(),temail.getText().toString().trim(),taskSnapshot.getUploadSessionUri().toString(),tphonenumber.getText().toString().trim(),tacademicstatus.getText().toString().trim(),tskillset.getSelectedItem().toString().trim());
 
-                addUser(tname.getText().toString().trim(),temail.getText().toString().trim(),taskSnapshot.getUploadSessionUri().toString(),tphonenumber.getText().toString().trim(),tacademicstatus.getSelectedItem().toString().trim(),tskillset.getSelectedItem().toString().trim());
-
+                addUser(tname.getText().toString().trim(),temail.getText().toString().trim(),
+                        taskSnapshot.getUploadSessionUri().toString(),tphonenumber.getText().toString().trim(),
+                        tacademicstatus.getSelectedItem().toString().trim(),tskillset.getSelectedItem().toString().trim());
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         }).addOnFailureListener(new OnFailureListener() {
     @Override

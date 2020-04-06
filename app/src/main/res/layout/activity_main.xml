@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,17 +16,37 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-
     <Button
+        android:layout_below="@+id/my_toolbar"
         android:id="@+id/btn_profile"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:text="click me" />
+
   <androidx.recyclerview.widget.RecyclerView
+      android:layout_below="@id/btn_profile"
      android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/recyclerview"
       />
+    
 
 
-</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
