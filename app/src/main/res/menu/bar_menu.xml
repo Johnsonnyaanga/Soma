@@ -4,21 +4,38 @@
 
 
 
+
+
     <item
-        android:id="@+id/home"
-        app:showAsAction="always"
-        android:icon="@drawable/home"
-        android:title="home" />
-    <item
-        android:title="search"
-        android:id="@+id/search"
-        android:icon="@drawable/search"
-        app:showAsAction="always"
+        android:id="@+id/create_profile"
+        android:title="Create Profile"
+        app:showAsAction="never"
         />
+
     <item
         android:id="@+id/logout"
-        android:title="logout"
+        android:title="Logout"
         app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/messages"
+        android:title="Profile"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/report_tutor"
+        android:title="Report Tutor"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/about"
+        android:title="About"
+        app:showAsAction="never"
         />
 
 

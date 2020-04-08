@@ -7,24 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorAccent"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <Button
-        android:layout_below="@+id/my_toolbar"
-        android:id="@+id/btn_profile"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:text="click me" />
+
 
   <androidx.recyclerview.widget.RecyclerView
-      android:layout_below="@id/btn_profile"
+      android:layout_below="@id/my_toolbar"
      android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/recyclerview"

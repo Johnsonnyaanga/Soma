@@ -33,23 +33,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         databaseReference = FirebaseDatabase.getInstance().getReference().child("SOMA").child("Users profile");
+        databaseReference.keepSynced(true);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setHasFixedSize(true);
-        Button profile = (Button)  findViewById(R.id.btn_profile);
 
-        Toolbar mytool = (Toolbar) findViewById(R.id.my_toolbar);
+
+        Toolbar mytool = findViewById(R.id.my_toolbar);
         setSupportActionBar(mytool);
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent();
-                i.setClassName("com.example.soma","com.example.soma.tutor_profile");
-                startActivity(i);
 
-            }
-        });
+
+
+
+
+
         
         loadData();
         
@@ -72,7 +71,8 @@ holder.fullprofile.setOnClickListener(new View.OnClickListener() {
     }
 
     private void getFullProfile() {
-        Intent me = new Intent(getApplicationContext(),tutor_profile.class);
+        Intent me = new Intent(getApplicationContext(),fullprofile.class);
+        startActivity(me);
 
     }
 });
@@ -88,6 +88,42 @@ holder.fullprofile.setOnClickListener(new View.OnClickListener() {
 adapter.startListening();
 recyclerView.setAdapter(adapter);
     }
+
+
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.bar_menu, menu);
+        return  true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if (id== R.id.logout){
+            Toast.makeText(getApplicationContext(),"i am a logout stuff",Toast.LENGTH_SHORT).show();
+        }
+
+        else if(id==R.id.messages){
+            startActivity(new Intent(getApplicationContext(),fullprofile.class));
+            Toast.makeText(getApplicationContext(),"i am a messaging somthing but under construction right now",Toast.LENGTH_SHORT).show();
+
+        }
+        else if(id==R.id.about){
+            Toast.makeText(getApplicationContext(),"oops! i am still under construction",Toast.LENGTH_SHORT).show();
+        }
+        else if(id==R.id.settings){
+            Toast.makeText(getApplicationContext(),"oops! i am your damn settings stuff cant do much now",Toast.LENGTH_LONG).show();
+        }
+        else if(id==R.id.report_tutor){
+            Toast.makeText(getApplicationContext(),"oops! i am gonna report someone once i am complete",Toast.LENGTH_LONG).show();
+        }
+        else if(id==R.id.create_profile){
+            Intent i = new Intent();
+            i.setClassName("com.example.soma","com.example.soma.tutor_profile");
+            startActivity(i);
+        }
+        return true;
+
+    }
+
 
 }
 

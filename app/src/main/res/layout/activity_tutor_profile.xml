@@ -91,17 +91,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2">
-            <EditText
-                android:hint="Enter your email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:id="@+id/tutor_email"/>
-        </RelativeLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

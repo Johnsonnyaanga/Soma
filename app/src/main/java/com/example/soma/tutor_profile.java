@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -34,12 +36,15 @@ public class tutor_profile extends AppCompatActivity {
     private Uri mImageUri;
     private String userid;
     StorageReference mstorageref;
+    FirebaseAuth getmail;
     DatabaseReference mDatabaseRef;
     ProgressBar mprogressbar;
-    EditText tname,temail,tphonenumber;
+    EditText tname,tphonenumber;
+    String temail;
     Spinner tacademicstatus;
     ImageView mImageView;
     Spinner tskillset;
+    FirebaseUser user;
     int PICK_IMAGE_REQUEST=100;
 
 
@@ -51,8 +56,16 @@ public class tutor_profile extends AppCompatActivity {
         setContentView(R.layout.activity_tutor_profile);
         mImageView = findViewById(R.id.profile_image);
         mprogressbar = findViewById(R.id.progressbar);
+
         tname = findViewById(R.id.tutor_name);
-        temail = findViewById(R.id.tutor_email);
+        temail = getmail.getCurrentUser().getEmail();
+
+         user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+             temail = user.getEmail();
+        } else {
+            Toast.makeText(getApplicationContext(),"no user signed in",Toast.LENGTH_SHORT);
+        }
         tphonenumber = findViewById(R.id.tutor_phone);
         btn_select = findViewById(R.id.tutor_profile_photo);
         btn_upload = findViewById(R.id.tutor_profile_photo_upload);
@@ -95,7 +108,7 @@ fileReference.putFile(mImageUri)
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 Toast.makeText(getApplicationContext(),"upload succesiful",Toast.LENGTH_SHORT).show();
 
-                addUser(tname.getText().toString().trim(),temail.getText().toString().trim(),
+                addUser(tname.getText().toString().trim(),temail.trim(),
                         taskSnapshot.getUploadSessionUri().toString(),tphonenumber.getText().toString().trim(),
                         tacademicstatus.getSelectedItem().toString().trim(),tskillset.getSelectedItem().toString().trim());
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -126,14 +139,12 @@ mprogressbar.setProgress((int) progress);
 
     private void checkIfallFieldsFilled() {
         String name = tname.getText().toString().trim();
-        String email = temail.getText().toString().trim();
+        String email = temail.trim();
         String phonenumber = tphonenumber.getText().toString().trim();
         String skill = tskillset.getSelectedItem().toString();
         String academic_status = tacademicstatus.getSelectedItem().toString();
         if (TextUtils.isEmpty(name)){
             tname.setError("name required");
-        }else if (TextUtils.isEmpty(email)){
-            temail.setError("email required");
         }
         else if (TextUtils.isEmpty(phonenumber)){
             tphonenumber.setError("phone number required");
@@ -177,7 +188,7 @@ mprogressbar.setProgress((int) progress);
     //insert user profile data
     public void addUser(String name, String email,String mImageurl, String phonenumber,String current_academic_status,String skillset){
         uploadfile users = new uploadfile(name, email,mImageurl, phonenumber,current_academic_status,skillset);
-        mDatabaseRef.child("Users profile").child(tname.getText().toString().trim()+userid).setValue(users).addOnSuccessListener(new OnSuccessListener<Void>() {
+        mDatabaseRef.child("Users profile").child(email.toString().trim()).setValue(users).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(getApplicationContext(), "successful text upload",Toast.LENGTH_LONG).show();

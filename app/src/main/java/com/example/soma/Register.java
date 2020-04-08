@@ -14,40 +14,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Login extends AppCompatActivity {
-    Button login_btn;
-    TextView registerLink;
+public class Register extends AppCompatActivity {
+    Button register_btn;
+    TextView loginLink;
     EditText auth_mail,auth_pass;
     private ProgressDialog mDialog;
     private FirebaseAuth mAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        registerLink = findViewById(R.id.signup_text);
-        auth_mail = findViewById(R.id.email_login);
-        auth_pass = findViewById(R.id.password_login);
-        login_btn = findViewById(R.id.btn_login);
+        setContentView(R.layout.activity_register);
+        loginLink = findViewById(R.id.signin_text);
+        auth_mail = findViewById(R.id.email_register);
+        auth_pass = findViewById(R.id.password_register);
+        register_btn = findViewById(R.id.btn_register);
         mDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
 
-        registerLink.setOnClickListener(new View.OnClickListener() {
+        register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Register.class));
-            }
-        });
-
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
                 String mEmail= auth_mail.getText().toString().trim();
                 String mPass=auth_pass.getText().toString().trim();
                 if(TextUtils.isEmpty(mEmail)){
@@ -62,25 +54,24 @@ public class Login extends AppCompatActivity {
                 mDialog.setMessage("Processing..");
                 mDialog.show();
 
-                mAuth.signInWithEmailAndPassword(mEmail,mPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mAuth.createUserWithEmailAndPassword(mEmail,mPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if(task.isSuccessful()){
-
-                            startActivity(new Intent(getApplicationContext(),tutor_profile.class));
-
+                        if (task.isSuccessful()){
+                   startActivity(new Intent(getApplicationContext(),Login.class));
+                            Toast.makeText(getApplicationContext(),"succesiful registeration",Toast.LENGTH_SHORT);
                             mDialog.dismiss();
-
-                        }else{
-                            Toast.makeText(getApplicationContext(),"failed"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            mDialog.dismiss();
-
                         }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
 
+                        Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT);
 
                     }
                 });
+
             }
         });
     }
